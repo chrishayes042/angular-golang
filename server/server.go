@@ -7,6 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// TODO : Get these in an env
 const (
 	host ="localhost"
 	port =5432
@@ -40,6 +41,7 @@ func main(){
 	if err != nil{
 		panic(err)
 	}
+	// TODO : get this information to the front end
 	// scan each row
 	for rows.Next(){
 		err := rows.Scan(&id, &userName, &userPass, &userEmail)
