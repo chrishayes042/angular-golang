@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
+	e "github.com/chrishayes042/angular-golang/model"
+
 	_ "github.com/lib/pq"
 )
 
@@ -48,9 +50,16 @@ func main(){
 		if err != nil{
 			panic(err)
 		}
+		var u e.User
+		u.UserName = userName
+		u.UserEmail = userEmail
+		u.UserId = id
+		
+		u.GetUserInfo(u.UserId, u.UserName, u.UserEmail)
 
+		// e.getUserInfo()
 		// print
-		fmt.Println(id, userName, userEmail)
+		// fmt.Println(id, userName, userEmail)
 	}
 	defer db.Close()
 	err = db.Ping()
