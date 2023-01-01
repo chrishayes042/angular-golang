@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	_ "github.com/lib/pq"
 	user "github.com/chrishayes042/angular-golang/pkg/model"
+	_ "github.com/lib/pq"
 )
 
 func GetAllUsers()(user.User){
@@ -15,11 +15,12 @@ func GetAllUsers()(user.User){
 	database := GetSQLInfo()
 	query := "SELECT * from users"
 	row := QueryDB(database, query)
-	row.Next(){
+	for row.Next() {
 		err := row.Scan(&id, &name, &pass, &email)
 		if err != nil{
 			panic(err)
 		}
+
 	}
 	var u user.User
 	u.UserName 	= name
