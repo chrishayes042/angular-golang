@@ -22,6 +22,8 @@ func GetAllUsers()(user.User){
 		}
 
 	}
+	// This will only return the last row of the user table
+	// TODO : Need to return a list of all the users in the table
 	var u user.User
 	u.UserName 	= name
 	u.UserId 	= id
