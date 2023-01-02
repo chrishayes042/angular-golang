@@ -1,18 +1,25 @@
 package controllers
 
 import (
+	"fmt"
+
 	user "github.com/chrishayes042/angular-golang/pkg/model"
 	_ "github.com/lib/pq"
 )
-
-func GetAllUsers()(user.User){
+// func to get all users from the sql table return them as a list
+func GetAllUsers()[]user.User{
+	// create new list of Users
+	var userList []user.User
+	
 	var  (
 		id  	int
 		name 	string
 		pass 	string
 		email 	string
 	)
+	// get the database info
 	database := GetSQLInfo()
+	// query string
 	query := "SELECT * from users"
 	row := QueryDB(database, query)
 	for row.Next() {
@@ -21,13 +28,16 @@ func GetAllUsers()(user.User){
 			panic(err)
 		}
 
-	}
-	// This will only return the last row of the user table
-	// TODO : Need to return a list of all the users in the table
-	var u user.User
-	u.UserName 	= name
-	u.UserId 	= id
-	u.UserEmail = email
+		var u user.User
+		u.UserName 	= name
+		u.UserId 	= id
+		u.UserEmail = email
+		fmt.Println("adding user" + u.UserName)
+		// user.GetUserList(u)
 
-	return u;
+		userList = append(userList, u)
+	}
+	
+		
+	return userList;
 }
